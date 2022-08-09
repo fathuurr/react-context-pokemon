@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react';
+import { useContext } from 'react';
 import { Button } from 'react-bootstrap';
 import PokemonsContext from '../context/PokemonsContext.js';
 
@@ -8,7 +8,7 @@ const Pokemon = ({ pks, setButton = true }) => {
   const { favorites, setFavorites } = useContext(PokemonsContext);
 
   const handleAddPokemon = (pokemon) => {
-    if (!favorites.some((fav) => fav.name == pokemon.name)) {
+    if (!favorites.some((fav) => fav.name === pokemon.name)) {
       setFavorites(favorites.concat(pokemon));
     }
   };
@@ -17,8 +17,6 @@ const Pokemon = ({ pks, setButton = true }) => {
     const filtered = favorites.filter((poke) => pokemon.name !== poke.name);
     setFavorites(filtered);
   };
-
-  const handleDetailsPokemon = (pokemon) => {};
 
   return (
     <>

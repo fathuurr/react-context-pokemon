@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route, Link, NavLink, useParams, Outlet } from 'react-router-dom';
+import { Routes, Route, NavLink } from 'react-router-dom';
 
 import Home from './components/Home';
 import PokemonsList from './components/PokemonList.js';
@@ -9,7 +9,6 @@ import Footer from './components/Footer';
 import PokemonDetails from './components/PokemonDetails.js';
 
 import { PokemonsContextProvider } from './context/PokemonsContext.js';
-import Pokemon from './components/Pokemon';
 
 function App() {
   return (

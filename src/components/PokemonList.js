@@ -3,8 +3,6 @@ import { useState, useEffect } from 'react';
 import Pokemon from './Pokemon.js';
 import pokemonService from '../services/pokemons.js';
 
-import { Table } from 'react-bootstrap';
-
 const PokemonsList = () => {
   const [loading, setLoading] = useState(false);
   const [pokemons, setPokemons] = useState([]);

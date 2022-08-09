@@ -12,7 +12,7 @@ const PokemonDetails = () => {
     pokemonService.pokemonDetail(name).then((res) => {
       setPokemon(res);
     });
-  }, []);
+  }, [name]);
 
   return (
     <div>

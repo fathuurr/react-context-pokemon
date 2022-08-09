@@ -3,8 +3,6 @@ import PokemonsContext from '../context/PokemonsContext.js';
 
 import Pokemon from './Pokemon.js';
 
-import { Table } from 'react-bootstrap';
-
 const Favorite = () => {
   const { favorites } = useContext(PokemonsContext);
 
