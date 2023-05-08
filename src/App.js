@@ -43,8 +43,6 @@ function App() {
             </Routes>
           </PokemonsContextProvider>
         </div>
-
-        <Footer />
       </div>
     </div>
   );

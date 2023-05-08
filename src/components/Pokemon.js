@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import PokemonsContext from '../context/PokemonsContext.js';
 
@@ -6,6 +6,15 @@ import { Link } from 'react-router-dom';
 
 const Pokemon = ({ pks, setButton = true }) => {
   const { favorites, setFavorites } = useContext(PokemonsContext);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(20);
+
+  const totalPages = Math.ceil(pks.length / itemsPerPage);
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = pks.slice(indexOfFirstItem, indexOfLastItem);
 
   const handleAddPokemon = (pokemon) => {
     if (!favorites.some((fav) => fav.name === pokemon.name)) {
@@ -20,7 +29,7 @@ const Pokemon = ({ pks, setButton = true }) => {
 
   return (
     <>
-      {pks.map((pokemon) => {
+      {currentItems.map((pokemon) => {
         return (
           <tr key={pokemon.name}>
             <td className="text-center">{pokemon.name.toUpperCase()}</td>
@@ -32,13 +41,14 @@ const Pokemon = ({ pks, setButton = true }) => {
                       handleAddPokemon(pokemon);
                     }}
                     type="button"
-                    className="btn btn-primary mx-2"
-                  >
+                    className="btn btn-primary mx-2">
                     Add to favorites
                   </Button>
                 ) : (
                   <>
-                    <Link className="btn btn-success mx-2" to={`/pokemon/${pokemon.name}`}>
+                    <Link
+                      className="btn btn-success mx-2"
+                      to={`/pokemon/${pokemon.name}`}>
                       View details
                     </Link>
 
@@ -47,8 +57,7 @@ const Pokemon = ({ pks, setButton = true }) => {
                         handleDeletePokemon(pokemon);
                       }}
                       type="button"
-                      className="btn btn-danger mx-2"
-                    >
+                      className="btn btn-danger mx-2">
                       Delete from favorites
                     </Button>
                   </>
@@ -58,6 +67,80 @@ const Pokemon = ({ pks, setButton = true }) => {
           </tr>
         );
       })}
+
+      <nav className="mt-3">
+        <ul className="pagination">
+          <li
+            className={`page-item ${currentPage === 1 && 'disabled'}`}
+            onClick={() =>
+              setCurrentPage(currentPage === 1 ? currentPage : currentPage - 1)
+            }>
+            <a href="#" className="page-link">
+              Previous
+            </a>
+          </li>
+          {Array.from({ length: totalPages }, (_, i) => (
+            <li
+              key={i}
+              className={`page-item ${i + 1 === currentPage && 'active'}`}
+              onClick={() => paginate(i + 1)}>
+              <a href="#" className="page-link">
+                {i + 1}
+              </a>
+            </li>
+          ))}
+          <li
+            className={`page-item ${currentPage === totalPages && 'disabled'}`}
+            onClick={() =>
+              setCurrentPage(
+                currentPage === totalPages ? currentPage : currentPage + 1
+              )
+            }>
+            <a href="#" className="page-link">
+              Next
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      {/* {pks.map((pokemon) => {
+        return (
+          <tr key={pokemon.name}>
+            <td className="text-center">{pokemon.name.toUpperCase()}</td>
+            <td>
+              <div className="text-center">
+                {setButton ? (
+                  <Button
+                    onClick={() => {
+                      handleAddPokemon(pokemon);
+                    }}
+                    type="button"
+                    className="btn btn-primary mx-2">
+                    Add to favorites
+                  </Button>
+                ) : (
+                  <>
+                    <Link
+                      className="btn btn-success mx-2"
+                      to={`/pokemon/${pokemon.name}`}>
+                      View details
+                    </Link>
+
+                    <Button
+                      onClick={() => {
+                        handleDeletePokemon(pokemon);
+                      }}
+                      type="button"
+                      className="btn btn-danger mx-2">
+                      Delete from favorites
+                    </Button>
+                  </>
+                )}
+              </div>
+            </td>
+          </tr>
+        );
+      })} */}
     </>
   );
 };
