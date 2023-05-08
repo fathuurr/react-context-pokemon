@@ -5,7 +5,6 @@ import Home from './components/Home';
 import PokemonsList from './components/PokemonList.js';
 import Favorite from './components/Favorite';
 import NotFound from './components/NotFound.js';
-import Footer from './components/Footer';
 import PokemonDetails from './components/PokemonDetails.js';
 
 import { PokemonsContextProvider } from './context/PokemonsContext.js';
