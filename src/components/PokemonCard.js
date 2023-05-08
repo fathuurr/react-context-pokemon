@@ -13,12 +13,12 @@ const PokemonCard = ({ pokemon }) => {
         <ul className="list-group list-group-flush">
           <li className="list-group-item">Weight: {pokemon.weight}</li>
           <li className="list-group-item">Height: {pokemon.height}</li>
-          {/* <li className="list-group-item">Height: {pokemon.types[0].type}</li> */}
         </ul>
+
         <ul className="list-group list-group-flush">
-          {Object.keys(pokemon.abilities).map((ab) => (
-            <li className="list-group-item" key={ab}>
-              {pokemon.abilities[ab].ability.name}
+          {Object.keys(pokemon.types).map((tp) => (
+            <li className="list-group-item" key={tp}>
+              {pokemon.types[tp].type.name}
             </li>
           ))}
         </ul>
