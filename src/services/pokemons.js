@@ -11,4 +11,9 @@ const pokemonDetail = (name) => {
   return request.then((res) => res.data);
 };
 
-export default { getAll, pokemonDetail };
+const exportedObject = {
+  getAll,
+  pokemonDetail,
+};
+
+export default exportedObject;

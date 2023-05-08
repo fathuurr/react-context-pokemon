@@ -75,18 +75,14 @@ const Pokemon = ({ pks, setButton = true }) => {
             onClick={() =>
               setCurrentPage(currentPage === 1 ? currentPage : currentPage - 1)
             }>
-            <a href="#" className="page-link">
-              Previous
-            </a>
+            <button className="page-link">Previous</button>
           </li>
           {Array.from({ length: totalPages }, (_, i) => (
             <li
               key={i}
               className={`page-item ${i + 1 === currentPage && 'active'}`}
               onClick={() => paginate(i + 1)}>
-              <a href="#" className="page-link">
-                {i + 1}
-              </a>
+              <button className="page-link">{i + 1}</button>
             </li>
           ))}
           <li
@@ -96,51 +92,10 @@ const Pokemon = ({ pks, setButton = true }) => {
                 currentPage === totalPages ? currentPage : currentPage + 1
               )
             }>
-            <a href="#" className="page-link">
-              Next
-            </a>
+            <button className="page-link">Next</button>
           </li>
         </ul>
       </nav>
-
-      {/* {pks.map((pokemon) => {
-        return (
-          <tr key={pokemon.name}>
-            <td className="text-center">{pokemon.name.toUpperCase()}</td>
-            <td>
-              <div className="text-center">
-                {setButton ? (
-                  <Button
-                    onClick={() => {
-                      handleAddPokemon(pokemon);
-                    }}
-                    type="button"
-                    className="btn btn-primary mx-2">
-                    Add to favorites
-                  </Button>
-                ) : (
-                  <>
-                    <Link
-                      className="btn btn-success mx-2"
-                      to={`/pokemon/${pokemon.name}`}>
-                      View details
-                    </Link>
-
-                    <Button
-                      onClick={() => {
-                        handleDeletePokemon(pokemon);
-                      }}
-                      type="button"
-                      className="btn btn-danger mx-2">
-                      Delete from favorites
-                    </Button>
-                  </>
-                )}
-              </div>
-            </td>
-          </tr>
-        );
-      })} */}
     </>
   );
 };
